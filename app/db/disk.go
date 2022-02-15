@@ -5,18 +5,29 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"path/filepath"
 
 	"larssonoliver.com/lnkshrt/app/config"
 )
 
 func (db *Database) loadFromDisk() {
-	log.Println("Loading database from file:", config.DBFile())
+	dbfile := config.DBFile()
 
-	buf, err := ioutil.ReadFile(config.DBFile())
+	log.Println("Loading database from file:", dbfile)
+
+	buf, err := ioutil.ReadFile(dbfile)
 
 	if err != nil {
 		log.Println("Error reading from file:", err)
 		log.Println("Creating new database...")
+
+		dir := filepath.Dir(dbfile)
+		err = os.MkdirAll(dir, os.ModePerm)
+
+		if err != nil {
+			log.Println("Error creating directory:", err)
+		}
+
 		return
 	}
 

@@ -9,7 +9,7 @@ import (
 const portDefault = 8080
 const idLengthDefault = 6
 const persistentDefault = false
-const dbfileDefault = "lnkshrt.json"
+const dbfileDefault = "data/lnkshrt.json"
 
 func Executable() string {
 	path, _ := os.Executable()
