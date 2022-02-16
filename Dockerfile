@@ -1,9 +1,15 @@
 # Build stage
 
-FROM golang:1.16-alpine as build
+FROM --platform=$BUILDPLATFORM golang:1.16-alpine as build
 
-ENV GOOS=linux
-ENV GOARCH=arm64
+ARG TARGETOS
+ARG TARGETARCH
+ARG TARGETVARIANT
+
+ARG GOOS=$TARGETOS
+ARG GOARCH=$TARGETARCH
+
+RUN if [ "$TARGETARCH" = "arm" ]; then export GOARM="${TARGETVARIANT//v}"; fi
 
 WORKDIR /app
 
