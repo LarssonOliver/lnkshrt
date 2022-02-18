@@ -1,9 +1,21 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import { Button, Container, Grid, TextField, Typography } from "@mui/material";
+import type { NextPage } from "next";
+import Head from "next/head";
+import { ChangeEventHandler, useState } from "react";
+import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
+  const [url, setUrl] = useState("");
+
+  const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    const val = e.target.value;
+    setUrl(val);
+  };
+
+  const onClick = () => {
+    alert(url);
+  };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -13,28 +25,59 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+        <Typography variant="h1" component="div">
+          lnkshrt
+        </Typography>
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.tsx</code>
-        </p>
+        <Typography variant="h5" component="div" marginBottom={"2em"}>
+          an open source url shortener
+        </Typography>
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
+        <Container maxWidth="md">
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={9} md={10}>
+              <TextField
+                label="URL"
+                fullWidth
+                value={url}
+                onChange={onChange}
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") {
+                    onClick();
+                  }
+                }}
+              />
+            </Grid>
+            <Grid item xs={12} sm={3} md={2}>
+              <Button
+                variant="outlined"
+                style={{ padding: "14.75px 14px" }}
+                fullWidth
+                onClick={onClick}
+                disabled={url === ""}
+              >
+                Shorten
+              </Button>
+            </Grid>
+          </Grid>
+        </Container>
+
+        {/* <form className={styles.card}>
+            <input type='text' value={url} onChange={onChange}></input>
+            <input type='submit'></input>
+          </form> */}
+        {/* <a href='https://nextjs.org/docs' className={styles.card}>
             <h2>Documentation &rarr;</h2>
             <p>Find in-depth information about Next.js features and API.</p>
           </a>
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
+          <a href='https://nextjs.org/learn' className={styles.card}>
             <h2>Learn &rarr;</h2>
             <p>Learn about Next.js in an interactive course with quizzes!</p>
           </a>
 
           <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
+            href='https://github.com/vercel/next.js/tree/canary/examples'
             className={styles.card}
           >
             <h2>Examples &rarr;</h2>
@@ -42,31 +85,30 @@ const Home: NextPage = () => {
           </a>
 
           <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+            href='https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app'
             className={styles.card}
           >
             <h2>Deploy &rarr;</h2>
             <p>
               Instantly deploy your Next.js site to a public URL with Vercel.
             </p>
-          </a>
-        </div>
+          </a> */}
       </main>
 
-      <footer className={styles.footer}>
+      {/* <footer className={styles.footer}>
         <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          href='https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app'
+          target='_blank'
+          rel='noopener noreferrer'
         >
           Powered by{' '}
           <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
+            <Image src='/vercel.svg' alt='Vercel Logo' width={72} height={16} />
           </span>
         </a>
-      </footer>
+      </footer> */}
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
