@@ -1,11 +1,25 @@
-import { Button, Container, Grid, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  Container,
+  Grid,
+  Link,
+  TextField,
+  Typography,
+} from "@mui/material";
+import ArrowRight from "@mui/icons-material/ArrowRightAlt";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { ChangeEventHandler, useState } from "react";
+import LinkModel from "../models/link";
 import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
   const [url, setUrl] = useState("");
+
+  const t: LinkModel = {
+    id: "abcd",
+    url: "https://larssonoliver.com",
+  };
 
   const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const val = e.target.value;
@@ -60,6 +74,26 @@ const Home: NextPage = () => {
               </Button>
             </Grid>
           </Grid>
+          <Container
+            maxWidth="md"
+            style={{
+              border: "1px solid #eaeaea",
+              borderRadius: "5px",
+              margin: "1rem 0",
+              padding: "1.5rem",
+            }}
+          >
+            <Typography variant="h6" component="div">
+              <Link href="" underline="none">
+                {t.id}
+              </Link>
+              <ArrowRight
+                color="disabled"
+                style={{ position: "relative", top: "5px", margin: "0 1em" }}
+              />
+              {t.url}
+            </Typography>
+          </Container>
         </Container>
 
         {/* <form className={styles.card}>
