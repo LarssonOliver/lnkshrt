@@ -7,6 +7,8 @@ import {
   Typography,
 } from "@mui/material";
 import ArrowRight from "@mui/icons-material/ArrowRightAlt";
+import CopyButton from "@mui/icons-material/ContentCopy";
+import GithubButton from "@mui/icons-material/GitHub";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { ChangeEventHandler, useState } from "react";
@@ -17,8 +19,8 @@ const Home: NextPage = () => {
   const [url, setUrl] = useState("");
 
   const t: LinkModel = {
-    id: "abcd",
-    url: "https://larssonoliver.com",
+    id: "https://l.larssonoliver.com/abcdef",
+    url: "https://blog.logrocket.com/implementing-copy-to-clipboard-in-react-with-clipboard-api/",
   };
 
   const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -28,6 +30,11 @@ const Home: NextPage = () => {
 
   const onClick = () => {
     alert(url);
+  };
+
+  const onCopy = async () => {
+    if ("clipboard" in navigator)
+      return await navigator.clipboard.writeText(url);
   };
 
   return (
@@ -74,27 +81,74 @@ const Home: NextPage = () => {
               </Button>
             </Grid>
           </Grid>
-          <Container
-            maxWidth="md"
-            style={{
-              border: "1px solid #eaeaea",
-              borderRadius: "5px",
-              margin: "1rem 0",
-              padding: "1.5rem",
-            }}
-          >
-            <Typography variant="h6" component="div">
-              <Link href="" underline="none">
-                {t.id}
-              </Link>
-              <ArrowRight
-                color="disabled"
-                style={{ position: "relative", top: "5px", margin: "0 1em" }}
-              />
-              {t.url}
-            </Typography>
-          </Container>
+
+          {t.id && (
+            <Container
+              maxWidth="md"
+              style={{
+                border: "1px solid #eaeaea",
+                borderRadius: "5px",
+                margin: "1rem 0",
+                padding: "1.5rem",
+              }}
+            >
+              <Typography
+                variant="body2"
+                component="div"
+                style={{
+                  color: "gray",
+                  wordBreak: "break-all",
+                  marginBottom: "1rem",
+                }}
+              >
+                {t.url}
+              </Typography>
+
+              <Typography
+                variant="h6"
+                component="div"
+                style={{ display: "flow-root" }}
+              >
+                <div style={{ float: "left" }}>
+                  <ArrowRight
+                    color="disabled"
+                    style={{
+                      position: "relative",
+                      top: "5px",
+                      marginRight: "1rem",
+                    }}
+                  />
+                  <Link
+                    href=""
+                    underline="none"
+                    style={{
+                      overflowX: "hidden",
+                      wordBreak: "break-all",
+                    }}
+                  >
+                    {t.id}
+                  </Link>
+                </div>
+                <Button
+                  variant="outlined"
+                  style={{ float: "right" }}
+                  onClick={onCopy}
+                >
+                  Copy link
+                  <CopyButton style={{ marginLeft: "1rem" }} />
+                </Button>
+              </Typography>
+            </Container>
+          )}
         </Container>
+
+        <Link
+          color="primary"
+          style={{ position: "absolute", right: "1em", bottom: "1em" }}
+          href="https://github.com/larssonoliver/lnkshrt"
+        >
+          <GithubButton />
+        </Link>
 
         {/* <form className={styles.card}>
             <input type='text' value={url} onChange={onChange}></input>
