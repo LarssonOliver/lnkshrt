@@ -15,12 +15,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: Set TAG environment variable
         run: echo "TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
 
       - name: Setup QEMU
         uses: docker/setup-qemu-action@v1
 
-      - name: Setup
+      - name: Setup buildx
         uses: docker/setup-buildx-action@v1
 
       - name: Login to DockerHub
