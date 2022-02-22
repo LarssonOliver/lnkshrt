@@ -1,8 +1,8 @@
-variable "tag" {
-    default = "0.1.1"
+variable "TAG" {
+    default = "latest"
 }
 
-variable "repo" {
+variable "REPO" {
     default = "larssonoliver/lnkshrt"
 }
 
@@ -19,7 +19,7 @@ target "lnkshrt" {
         "linux/arm64",
     ]
     tags = [
-        "${repo}:latest", 
-        "${repo}:${tag}",
+        "${REPO}:latest", 
+        "${REPO}:${TAG}",
     ]
 }
