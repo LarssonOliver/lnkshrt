@@ -4,12 +4,15 @@ import (
 	"os"
 	"path/filepath"
 	"strconv"
+	"strings"
 )
 
 const portDefault = 8080
 const idLengthDefault = 6
 const persistentDefault = false
 const dbfileDefault = "data/lnkshrt.json"
+
+var originsDefault = []string{}
 
 func Executable() string {
 	path, _ := os.Executable()
@@ -68,4 +71,12 @@ func DBFile() string {
 	}
 
 	return dbfile
+}
+
+func Origins() []string {
+	if origins, found := os.LookupEnv("LNKSHRT_ORIGINS"); found {
+		return strings.Split(origins, ",")
+	}
+
+	return originsDefault
 }

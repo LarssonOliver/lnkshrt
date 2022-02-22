@@ -8,3 +8,4 @@ A link shortener written in go.
 | `LNKSHRT_IDSIZE` | Size of shortened URL ids in characters | `6` |
 | `LNKSHRT_DBFILE` | Database file | `data/lnkshrt.json` |
 | `LNKSHRT_PERSISTENT` | Store data in, and load data from, `LNKSHRT_DBFILE` | `undefined (false)` | 
+| `LNKSHRT_ORIGINS` | Comma separated list of CORS origins to allow | `undefined (none)` | 
