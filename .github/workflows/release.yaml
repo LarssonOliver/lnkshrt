@@ -36,6 +36,5 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push
-        uses: docker/bake-action@master
-        with:
-          push: true
+        run: docker buildx bake --push --print
+        working-directory: lnkshrt
