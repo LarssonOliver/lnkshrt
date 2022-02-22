@@ -1,5 +1,5 @@
 variable "tag" {
-    default = "0.1"
+    default = "0.1.1"
 }
 
 variable "repo" {
