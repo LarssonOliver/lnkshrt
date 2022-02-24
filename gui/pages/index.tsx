@@ -11,7 +11,7 @@ import CopyButton from "@mui/icons-material/ContentCopy";
 import GithubButton from "@mui/icons-material/GitHub";
 import type { NextPage } from "next";
 import Head from "next/head";
-import { ChangeEventHandler, useState } from "react";
+import { ChangeEventHandler, useEffect, useState } from "react";
 import LinkModel from "../models/link";
 import styles from "../styles/Home.module.css";
 import axios from "axios";
@@ -19,6 +19,11 @@ import axios from "axios";
 const Home: NextPage = () => {
   const [url, setUrl] = useState("");
   const [shortUrl, setShortUrl] = useState<LinkModel | undefined>();
+  const [apiUrl, setApiUrl] = useState("");
+
+  useEffect(() => {
+    axios.get("/path").then((res) => setApiUrl(res.data.path));
+  }, []);
 
   const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const val = e.target.value;
@@ -32,9 +37,7 @@ const Home: NextPage = () => {
 
   const onCopy = async () => {
     if ("clipboard" in navigator && shortUrl)
-      return await navigator.clipboard.writeText(
-        `${process.env.NEXT_PUBLIC_API_URL}/${shortUrl.id}`
-      );
+      return await navigator.clipboard.writeText(`${apiUrl}/${shortUrl.id}`);
   };
 
   return (
@@ -99,14 +102,14 @@ const Home: NextPage = () => {
               >
                 <div style={{ float: "left" }}>
                   <Link
-                    href={`${process.env.NEXT_PUBLIC_API_URL}/${shortUrl.id}`}
+                    href={`${apiUrl}/${shortUrl.id}`}
                     underline="none"
                     style={{
                       overflowX: "hidden",
                       wordBreak: "break-all",
                     }}
                   >
-                    {`${process.env.NEXT_PUBLIC_API_URL}/${shortUrl.id}`}
+                    {`${apiUrl}/${shortUrl.id}`}
                   </Link>
                 </div>
                 <Button
