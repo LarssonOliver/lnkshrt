@@ -42,8 +42,8 @@ jobs:
 
       - name: Build
         working-directory: gui
-        run: npm build
+        run: npm run build
 
       - name: Lint
         working-directory: gui
-        run: npm lint
+        run: npm run lint
