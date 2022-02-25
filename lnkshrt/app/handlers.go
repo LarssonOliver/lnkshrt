@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"larssonoliver.com/lnkshrt/app/config"
 	"larssonoliver.com/lnkshrt/app/helpers"
 	"larssonoliver.com/lnkshrt/app/models"
 )
@@ -38,6 +39,16 @@ func (a *App) CreateLink(w http.ResponseWriter, r *http.Request) {
 
 	a.Database.Set(link.Id, link.Url)
 	json.NewEncoder(w).Encode(link)
+}
+
+func (a *App) IndexRedirect(w http.ResponseWriter, r *http.Request) {
+	// If the url is defined as an env variable, redirect to it
+	if config.IndexRedirect() == "" {
+		http.Error(w, http.StatusText(http.StatusMethodNotAllowed), http.StatusMethodNotAllowed)
+		return
+	}
+
+	http.Redirect(w, r, config.IndexRedirect(), http.StatusTemporaryRedirect)
 }
 
 func (a *App) ResolveLink(w http.ResponseWriter, r *http.Request) {

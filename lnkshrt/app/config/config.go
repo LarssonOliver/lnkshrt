@@ -11,6 +11,7 @@ const portDefault = 8080
 const idLengthDefault = 6
 const persistentDefault = false
 const dbfileDefault = "data/lnkshrt.json"
+const indexRedirectDefault = ""
 
 var originsDefault = []string{}
 
@@ -79,4 +80,12 @@ func Origins() []string {
 	}
 
 	return originsDefault
+}
+
+func IndexRedirect() string {
+	if indexRedirect, found := os.LookupEnv("LNKSHRT_INDEX_REDIRECT"); found {
+		return indexRedirect
+	}
+
+	return indexRedirectDefault
 }

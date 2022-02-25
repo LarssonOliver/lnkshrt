@@ -9,3 +9,4 @@ A link shortener written in go.
 | `LNKSHRT_DBFILE` | Database file | `data/lnkshrt.json` |
 | `LNKSHRT_PERSISTENT` | Store data in, and load data from, `LNKSHRT_DBFILE` | `undefined (false)` | 
 | `LNKSHRT_ORIGINS` | Comma separated list of CORS origins to allow | `undefined (none)` | 
+| `LNKSHRT_INDEX_REDIRECT` | A URL to redirect to from the `GET /` route | `undefined (none)` |
