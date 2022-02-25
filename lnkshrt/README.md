@@ -1,7 +1,10 @@
 # lnkshrt
 A link shortener written in go.
 
-## Environment variables
+## Container Image
+The latest version is available as `larssonoliver/lnkshrt:latest` from DockerHub.
+
+## Environment Variables
 | Variable | Description | Default |
 | - | - | - |
 | `LNKSHRT_PORT` | Port to listen to for requests | `8080` |
