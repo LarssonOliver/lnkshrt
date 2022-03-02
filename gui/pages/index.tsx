@@ -75,7 +75,7 @@ const Home: NextPage = () => {
             <Grid item xs={12} sm={3} md={2}>
               <Button
                 variant="outlined"
-                style={{ padding: "14.75px 14px" }}
+                className={styles.shortenButton}
                 fullWidth
                 onClick={onShorten}
                 disabled={url === ""}
@@ -86,15 +86,7 @@ const Home: NextPage = () => {
           </Grid>
 
           {shortUrl !== undefined && (
-            <Container
-              maxWidth="md"
-              style={{
-                border: "1px solid #eaeaea",
-                borderRadius: "5px",
-                margin: "1rem 0",
-                padding: "1.5rem",
-              }}
-            >
+            <Container maxWidth="md" className={styles.resultContainer}>
               <Typography
                 variant="h6"
                 component="div"
@@ -104,10 +96,7 @@ const Home: NextPage = () => {
                   <Link
                     href={`${apiUrl}/${shortUrl.id}`}
                     underline="none"
-                    style={{
-                      overflowX: "hidden",
-                      wordBreak: "break-all",
-                    }}
+                    className={styles.link}
                   >
                     {`${apiUrl}/${shortUrl.id}`}
                   </Link>
@@ -118,26 +107,16 @@ const Home: NextPage = () => {
                   onClick={onCopy}
                 >
                   Copy link
-                  <CopyButton style={{ marginLeft: "1rem" }} />
+                  <CopyButton className={styles.copyButton} />
                 </Button>
               </Typography>
 
               <Typography
                 variant="body2"
                 component="div"
-                style={{
-                  color: "gray",
-                  wordBreak: "break-all",
-                }}
+                className={styles.longLink}
               >
-                <ArrowRight
-                  color="disabled"
-                  style={{
-                    position: "relative",
-                    top: "5px",
-                    marginRight: "1rem",
-                  }}
-                />
+                <ArrowRight color="disabled" className={styles.linkArrow} />
                 {shortUrl.url}
               </Typography>
             </Container>
@@ -146,7 +125,7 @@ const Home: NextPage = () => {
 
         <Link
           color="primary"
-          style={{ position: "absolute", right: "1em", bottom: "1em" }}
+          className={styles.link}
           href="https://github.com/larssonoliver/lnkshrt"
         >
           <GithubButton />
