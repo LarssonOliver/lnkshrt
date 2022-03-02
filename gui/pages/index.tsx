@@ -125,7 +125,7 @@ const Home: NextPage = () => {
 
         <Link
           color="primary"
-          className={styles.link}
+          className={styles.github}
           href="https://github.com/larssonoliver/lnkshrt"
         >
           <GithubButton />
