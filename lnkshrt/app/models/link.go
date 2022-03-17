@@ -1,6 +1,7 @@
 package models
 
 type Link struct {
-	Id  string `json:"id"`
-	Url string `json:"url"`
+	Id          string `json:"id"`
+	Url         string `json:"url"`
+	CreatedDate string `json:"created_at"`
 }

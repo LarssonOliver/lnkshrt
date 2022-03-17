@@ -20,5 +20,5 @@
 # Go workspace file
 go.work
 
-# Default db file
-data/lnkshrt.json
+# Default db directory
+data/
