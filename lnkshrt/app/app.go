@@ -1,7 +1,10 @@
 package app
 
 import (
+	"log"
+
 	"github.com/gorilla/mux"
+	"larssonoliver.com/lnkshrt/app/config"
 	"larssonoliver.com/lnkshrt/app/db"
 )
 
@@ -11,9 +14,14 @@ type App struct {
 }
 
 func New() *App {
+	db, err := db.New(config.DBFile())
+	if err != nil {
+		log.Fatalln(err)
+	}
+
 	a := &App{
 		Router:   mux.NewRouter().StrictSlash(true),
-		Database: db.New(),
+		Database: db,
 	}
 
 	a.initRoutes()

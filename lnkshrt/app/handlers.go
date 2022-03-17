@@ -25,19 +25,28 @@ func (a *App) CreateLink(w http.ResponseWriter, r *http.Request) {
 		status = http.StatusBadRequest
 	}
 
+	link.Id, _ = a.Database.GetId(link.Url)
+	// If a db error occured, it will be caught when trying to generate a new id
+
+	if link.Id == "" {
+		for {
+			link.Id = helpers.NewId()
+
+			if l, _ := a.Database.Get(link.Id); l == "" {
+				err = a.Database.Set(link.Id, link.Url)
+				if err != nil {
+					status = http.StatusInternalServerError
+				}
+				break
+			}
+		}
+	}
+
 	if status != http.StatusCreated {
 		http.Error(w, http.StatusText(status), status)
 		return
 	}
 
-	for {
-		link.Id = helpers.NewId()
-		if _, found := a.Database.Get(link.Id); !found {
-			break
-		}
-	}
-
-	a.Database.Set(link.Id, link.Url)
 	json.NewEncoder(w).Encode(link)
 }
 
@@ -55,9 +64,9 @@ func (a *App) ResolveLink(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["id"]
 
-	link, found := a.Database.Get(id)
+	link, err := a.Database.Get(id)
 
-	if !found {
+	if err != nil {
 		http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
 		return
 	}

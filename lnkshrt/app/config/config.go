@@ -9,8 +9,7 @@ import (
 
 const portDefault = 8080
 const idLengthDefault = 6
-const persistentDefault = false
-const dbfileDefault = "data/lnkshrt.json"
+const dbfileDefault = "data/lnkshrt.db"
 const indexRedirectDefault = ""
 
 var originsDefault = []string{}
@@ -50,18 +49,6 @@ func IdLength() int {
 	}
 
 	return num
-}
-
-func Persistent() bool {
-	if persistent, found := os.LookupEnv("LNKSHRT_PERSISTENT"); found {
-		val, err := strconv.ParseBool(persistent)
-		if err != nil {
-			val = true
-		}
-		return val
-	}
-
-	return persistentDefault
 }
 
 func DBFile() string {

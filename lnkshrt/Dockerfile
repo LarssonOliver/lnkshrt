@@ -2,6 +2,9 @@
 
 FROM golang:1.16-alpine as build
 
+# Add sqlite build dependencies
+RUN apk add --update gcc musl-dev
+
 WORKDIR /app
 
 COPY go.mod ./
@@ -17,14 +20,10 @@ RUN go build -o /lnkshrt
 
 FROM alpine:3.15
 
-RUN addgroup -S nonroot && adduser -S nonroot -G nonroot
-
 WORKDIR /
 
 COPY --from=build /lnkshrt .
 
-USER nonroot:nonroot
-
 EXPOSE 8080
 
-CMD ["./lnkshrt"]
+CMD /lnkshrt
