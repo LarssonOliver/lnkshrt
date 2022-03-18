@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
+	"net/url"
 
 	"github.com/gorilla/mux"
 	"larssonoliver.com/lnkshrt/app/config"
@@ -23,6 +24,21 @@ func (a *App) CreateLink(w http.ResponseWriter, r *http.Request) {
 
 	if json.Unmarshal(body, &link) != nil || link.Url == "" {
 		status = http.StatusBadRequest
+	}
+
+	url, err := url.Parse(link.Url)
+	if err != nil {
+		status = http.StatusBadRequest
+	}
+
+	if url.Scheme == "" {
+		url.Scheme = "http"
+	}
+	link.Url = url.String()
+
+	if status != http.StatusCreated {
+		http.Error(w, http.StatusText(status), status)
+		return
 	}
 
 	link.Id, _ = a.Database.GetId(link.Url)
