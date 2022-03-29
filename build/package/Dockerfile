@@ -7,14 +7,14 @@ RUN apk add --update gcc musl-dev
 
 WORKDIR /app
 
-COPY go.mod ./
-COPY go.sum ./
+COPY go.mod .
+COPY go.sum .
 
 RUN go mod download
 
-COPY . .
+COPY scripts internal main.go ./
 
-RUN go build -o /lnkshrt
+RUN sh scripts/build.sh
 
 # Deploy stage
 
@@ -22,7 +22,7 @@ FROM alpine:3.15
 
 WORKDIR /
 
-COPY --from=build /lnkshrt .
+COPY --from=build /app/bin/lnkshrt .
 
 EXPOSE 8080
 

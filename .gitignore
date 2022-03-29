@@ -25,3 +25,6 @@ data/
 
 # Debug binary
 __debug_bin
+
+# Output dir
+bin/
