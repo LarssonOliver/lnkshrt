@@ -4,8 +4,8 @@ import (
 	"log"
 
 	"github.com/gorilla/mux"
-	"larssonoliver.com/lnkshrt/internal/config"
-	"larssonoliver.com/lnkshrt/internal/db"
+	"github.com/larssonoliver/lnkshrt/internal/config"
+	"github.com/larssonoliver/lnkshrt/internal/db"
 )
 
 type App struct {

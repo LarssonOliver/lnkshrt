@@ -7,9 +7,9 @@ import (
 	"net/url"
 
 	"github.com/gorilla/mux"
-	"larssonoliver.com/lnkshrt/internal/config"
-	"larssonoliver.com/lnkshrt/internal/helpers"
-	"larssonoliver.com/lnkshrt/internal/models"
+	"github.com/larssonoliver/lnkshrt/internal/config"
+	"github.com/larssonoliver/lnkshrt/internal/helpers"
+	"github.com/larssonoliver/lnkshrt/internal/models"
 )
 
 func (a *App) CreateLink(w http.ResponseWriter, r *http.Request) {

@@ -12,9 +12,9 @@ COPY go.sum .
 
 RUN go mod download
 
-COPY internal main.go ./
+COPY scripts internal main.go ./
 
-RUN go build -o /lnkshrt
+RUN sh scripts/build.sh
 
 # Deploy stage
 
@@ -22,7 +22,7 @@ FROM alpine:3.15
 
 WORKDIR /
 
-COPY --from=build /lnkshrt .
+COPY --from=build /app/bin/lnkshrt .
 
 EXPOSE 8080
 

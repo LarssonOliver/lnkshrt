@@ -1,4 +1,4 @@
-module larssonoliver.com/lnkshrt
+module github.com/larssonoliver/lnkshrt
 
 go 1.17
 
