@@ -7,8 +7,8 @@ import (
 
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
-	"larssonoliver.com/lnkshrt/app"
-	"larssonoliver.com/lnkshrt/app/config"
+	"larssonoliver.com/lnkshrt/internal/app"
+	"larssonoliver.com/lnkshrt/internal/config"
 )
 
 func logInit() {

@@ -20,12 +20,12 @@ RUN if [ "$TARGETARCH" = "arm" ]; then \
 
 WORKDIR /app
 
-COPY go.mod ./
-COPY go.sum ./
+COPY go.mod .
+COPY go.sum .
 
 RUN go mod download
 
-COPY . .
+COPY internal main.go ./
 
 RUN go build -o /lnkshrt
 

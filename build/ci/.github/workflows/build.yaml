@@ -19,11 +19,9 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: 1.17
-          check-latest: true
 
       - name: Build
-        working-directory: lnkshrt
-        run: go build -v ./...
+        run: sh scripts/build.sh
 
   gui-build:
     runs-on: self-hosted

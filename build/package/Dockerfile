@@ -7,12 +7,12 @@ RUN apk add --update gcc musl-dev
 
 WORKDIR /app
 
-COPY go.mod ./
-COPY go.sum ./
+COPY go.mod .
+COPY go.sum .
 
 RUN go mod download
 
-COPY . .
+COPY internal main.go ./
 
 RUN go build -o /lnkshrt
 

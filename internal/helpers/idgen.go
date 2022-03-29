@@ -4,7 +4,7 @@ import (
 	"math/rand"
 	"time"
 
-	"larssonoliver.com/lnkshrt/app/config"
+	"larssonoliver.com/lnkshrt/internal/config"
 )
 
 var runes = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
