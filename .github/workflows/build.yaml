@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  lnkshrt-build:
+  build:
     runs-on: self-hosted
     steps:
       - name: Checkout
@@ -23,7 +23,7 @@ jobs:
       - name: Build
         run: sh scripts/build.sh
 
-  gui-build:
+  lnkshrt-gui-build:
     runs-on: self-hosted
     steps:
       - name: Checkout
@@ -35,13 +35,13 @@ jobs:
           node-version: 12
 
       - name: Dependency Install
-        working-directory: gui
+        working-directory: web/lnkshrt-gui
         run: npm ci
 
       - name: Build
-        working-directory: gui
+        working-directory: web/lnkshrt-gui
         run: npm run build
 
       - name: Lint
-        working-directory: gui
+        working-directory: web/lnkshrt-gui
         run: npm run lint
