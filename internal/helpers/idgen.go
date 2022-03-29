@@ -10,8 +10,12 @@ import (
 var runes = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
 
 func NewId() string {
+	return genId(config.IdLength())
+}
+
+func genId(length int) string {
 	rand.Seed(time.Now().UnixNano())
-	b := make([]rune, config.IdLength())
+	b := make([]rune, length)
 	for i := range b {
 		b[i] = runes[rand.Intn(len(runes))]
 	}
