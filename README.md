@@ -2,6 +2,8 @@
 
 A link shortener written in go. 
 
+[![Build](https://github.com/LarssonOliver/lnkshrt/actions/workflows/build.yaml/badge.svg)](https://github.com/LarssonOliver/lnkshrt/actions/workflows/build.yaml)
+
 ## Deployed
 A deployed version can be accessed over at https://lnkshrt.larssonoliver.com.
 
