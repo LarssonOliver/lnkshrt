@@ -8,6 +8,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: self-hosted
@@ -60,4 +63,6 @@ jobs:
       - name: Lint
         uses: golangci/golangci-lint-action@v2
         with:
-          skip-cache: true
+          skip-pkg-cache: true
+          skip-build-cache: true
+          working-directory: ./...
