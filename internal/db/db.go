@@ -17,8 +17,8 @@ type Database struct {
 type rwMode string
 
 const (
-	read   rwMode = "ro"
-	write  rwMode = "rw"
+	// read   rwMode = "ro"
+	// write  rwMode = "rw"
 	create rwMode = "rwc"
 )
 

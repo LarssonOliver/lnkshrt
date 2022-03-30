@@ -63,7 +63,11 @@ func (a *App) CreateLink(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	json.NewEncoder(w).Encode(link)
+  err = json.NewEncoder(w).Encode(link)
+  if err != nil {
+    status = http.StatusInternalServerError 
+		http.Error(w, http.StatusText(status), status)
+  }
 }
 
 func (a *App) IndexRedirect(w http.ResponseWriter, r *http.Request) {
