@@ -71,4 +71,4 @@ jobs:
         with:
           skip-pkg-cache: true
           skip-build-cache: true
-          working-directory: ./...
+          working-directory: cmd/lnkshrt 
