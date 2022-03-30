@@ -20,11 +20,19 @@ jobs:
         with:
           go-version: 1.17
 
-      - name: Test
-        run: sh scripts/test.sh
+      - name: Verify Dependencies
+        run: go mod verify
 
       - name: Build
         run: sh scripts/build.sh
+
+      - name: Test
+        run: sh scripts/test.sh
+
+      - name: Lint
+        uses: golangci/golangci-lint-action@v2
+        with:
+          skip-cache: true
 
   lnkshrt-gui-build:
     runs-on: self-hosted
