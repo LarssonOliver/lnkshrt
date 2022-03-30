@@ -69,6 +69,5 @@ jobs:
       - name: Lint
         uses: golangci/golangci-lint-action@v2
         with:
-          skip-pkg-cache: true
-          skip-build-cache: true
-          working-directory: cmd/lnkshrt 
+          args: -v
+          version: latest
