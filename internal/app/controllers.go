@@ -8,8 +8,8 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/larssonoliver/lnkshrt/internal/config"
-	"github.com/larssonoliver/lnkshrt/internal/helpers"
 	"github.com/larssonoliver/lnkshrt/internal/models"
+	"github.com/larssonoliver/lnkshrt/internal/util"
 )
 
 func (a *App) CreateLink(w http.ResponseWriter, r *http.Request) {
@@ -46,7 +46,7 @@ func (a *App) CreateLink(w http.ResponseWriter, r *http.Request) {
 
 	if link.Id == "" {
 		for {
-			link.Id = helpers.NewId()
+			link.Id = util.NewId()
 
 			if l, _ := a.Database.Get(link.Id); l == "" {
 				err = a.Database.Set(link.Id, link.Url)
@@ -63,11 +63,11 @@ func (a *App) CreateLink(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-  err = json.NewEncoder(w).Encode(link)
-  if err != nil {
-    status = http.StatusInternalServerError 
+	err = json.NewEncoder(w).Encode(link)
+	if err != nil {
+		status = http.StatusInternalServerError
 		http.Error(w, http.StatusText(status), status)
-  }
+	}
 }
 
 func (a *App) IndexRedirect(w http.ResponseWriter, r *http.Request) {
