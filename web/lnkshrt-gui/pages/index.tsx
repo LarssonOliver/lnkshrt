@@ -5,7 +5,7 @@ import {
   Link,
   TextField,
   Typography,
-  useMediaQuery,
+  IconButton,
 } from "@mui/material";
 import ArrowRight from "@mui/icons-material/ArrowRightAlt";
 import CopyButton from "@mui/icons-material/ContentCopy";
@@ -124,14 +124,13 @@ const Home: NextPage = () => {
           )}
         </Container>
 
-        <Link
-          color="primary"
+        <IconButton
           className={styles.github}
           href="https://github.com/larssonoliver/lnkshrt"
           target={"_blank"}
         >
           <GithubButton />
-        </Link>
+        </IconButton>
       </main>
     </div>
   );
