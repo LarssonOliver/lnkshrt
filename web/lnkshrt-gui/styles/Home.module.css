@@ -13,6 +13,7 @@
   position: absolute;
   right: 1rem;
   bottom: 1rem;
+  color: inherit;
 }
 
 .shortenButton {
@@ -25,6 +26,12 @@
   border-radius: 5px;
   margin: 1rem 0;
   padding: 1.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .resultContainer {
+    border-color: #444;
+  }
 }
 
 .link {
