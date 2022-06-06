@@ -10,7 +10,7 @@
 }
 
 .github {
-  position: absolute;
+  position: absolute !important;
   right: 1rem;
   bottom: 1rem;
   color: inherit;
