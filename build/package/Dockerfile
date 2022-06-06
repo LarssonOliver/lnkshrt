@@ -12,7 +12,9 @@ COPY go.sum .
 
 RUN go mod download
 
-COPY scripts internal main.go ./
+COPY scripts/build.sh scripts/build.sh 
+COPY cmd cmd
+COPY internal internal
 
 RUN sh scripts/build.sh
 
