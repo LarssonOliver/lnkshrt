@@ -16,6 +16,13 @@
   color: inherit;
 }
 
+.themeToggle {
+  position: absolute !important;
+  right: 1rem;
+  bottom: 3.5rem;
+  color: inherit;
+}
+
 .shortenButton {
   padding: 14.75px 14px;
   height: 100%;
@@ -28,10 +35,8 @@
   padding: 1.5rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  .resultContainer {
-    border-color: #444;
-  }
+.resultContainerDark {
+  border-color: #444 !important;
 }
 
 .link {

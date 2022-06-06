@@ -12,23 +12,48 @@ import { createTheme } from "@mui/material/styles";
 import { ThemeProvider } from "@emotion/react";
 import { CssBaseline } from "@mui/material";
 
+export const ColorModeContext = React.createContext({
+  toggleColorMode: () => {},
+  isDarkMode: false,
+});
+
 function MyApp({ Component, pageProps }: AppProps) {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  const [mode, setMode] = React.useState<"light" | "dark">(
+    prefersDarkMode ? "dark" : "light"
+  );
+
+  React.useEffect(() => {
+    setMode(prefersDarkMode ? "dark" : "light");
+  }, [prefersDarkMode]);
+
+  const colorMode = React.useMemo(
+    () => ({
+      toggleColorMode: () => {
+        setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+      },
+      isDarkMode: mode === "dark",
+    }),
+    [mode]
+  );
+
   const theme = React.useMemo(
     () =>
       createTheme({
         palette: {
-          mode: prefersDarkMode ? "dark" : "light",
+          mode,
         },
       }),
-    [prefersDarkMode]
+    [mode]
   );
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Component {...pageProps} />
-    </ThemeProvider>
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </ColorModeContext.Provider>
   );
 }
 

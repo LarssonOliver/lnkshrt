@@ -7,20 +7,27 @@ import {
   Typography,
   IconButton,
 } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import ArrowRight from "@mui/icons-material/ArrowRightAlt";
 import CopyButton from "@mui/icons-material/ContentCopy";
 import GithubButton from "@mui/icons-material/GitHub";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
 import type { NextPage } from "next";
 import Head from "next/head";
-import { ChangeEventHandler, useEffect, useState } from "react";
+import { ChangeEventHandler, useContext, useEffect, useState } from "react";
 import LinkModel from "../models/link";
 import styles from "../styles/Home.module.css";
 import axios from "axios";
+import { ColorModeContext } from "./_app";
 
 const Home: NextPage = () => {
   const [url, setUrl] = useState("");
   const [shortUrl, setShortUrl] = useState<LinkModel | undefined>();
   const [apiUrl, setApiUrl] = useState("");
+
+  const theme = useTheme();
+  const colorMode = useContext(ColorModeContext);
 
   useEffect(() => {
     axios.get("/path").then((res) => setApiUrl(res.data.path));
@@ -87,42 +94,64 @@ const Home: NextPage = () => {
           </Grid>
 
           {shortUrl !== undefined && (
-            <Container maxWidth="md" className={styles.resultContainer}>
-              <Typography
-                variant="h6"
-                component="div"
-                style={{ display: "flow-root", marginBottom: ".5rem" }}
-              >
-                <div style={{ float: "left" }}>
-                  <Link
-                    href={`${apiUrl}/${shortUrl.id}`}
-                    underline="none"
-                    className={styles.link}
-                  >
-                    {`${apiUrl}/${shortUrl.id}`}
-                  </Link>
-                </div>
-                <Button
-                  variant="outlined"
-                  style={{ float: "right" }}
-                  onClick={onCopy}
+            <ColorModeContext.Consumer>
+              {(colorMode) => (
+                <Container
+                  maxWidth="md"
+                  className={
+                    styles.resultContainer +
+                    " " +
+                    (colorMode.isDarkMode ? styles.resultContainerDark : "")
+                  }
                 >
-                  Copy link
-                  <CopyButton className={styles.copyButton} />
-                </Button>
-              </Typography>
+                  <Typography
+                    variant="h6"
+                    component="div"
+                    style={{ display: "flow-root", marginBottom: ".5rem" }}
+                  >
+                    <div style={{ float: "left" }}>
+                      <Link
+                        href={`${apiUrl}/${shortUrl.id}`}
+                        underline="none"
+                        className={styles.link}
+                      >
+                        {`${apiUrl}/${shortUrl.id}`}
+                      </Link>
+                    </div>
+                    <Button
+                      variant="outlined"
+                      style={{ float: "right" }}
+                      onClick={onCopy}
+                    >
+                      Copy link
+                      <CopyButton className={styles.copyButton} />
+                    </Button>
+                  </Typography>
 
-              <Typography
-                variant="body2"
-                component="div"
-                className={styles.longLink}
-              >
-                <ArrowRight color="disabled" className={styles.linkArrow} />
-                {shortUrl.url}
-              </Typography>
-            </Container>
+                  <Typography
+                    variant="body2"
+                    component="div"
+                    className={styles.longLink}
+                  >
+                    <ArrowRight color="disabled" className={styles.linkArrow} />
+                    {shortUrl.url}
+                  </Typography>
+                </Container>
+              )}
+            </ColorModeContext.Consumer>
           )}
         </Container>
+
+        <IconButton
+          className={styles.themeToggle}
+          onClick={colorMode.toggleColorMode}
+        >
+          {theme.palette.mode === "dark" ? (
+            <Brightness7Icon />
+          ) : (
+            <Brightness4Icon />
+          )}
+        </IconButton>
 
         <IconButton
           className={styles.github}
