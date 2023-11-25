@@ -10,7 +10,7 @@ on:
 
 jobs:
   lnkshrt-gui-build:
-    runs-on: self-hosted
+    runs-on: lnkshrt-runner-set
     steps:
       - name: Checkout
         uses: actions/checkout@v2
